@@ -1,23 +1,18 @@
-var Hapi = require('hapi');
-var swaggerHapi = require('swagger-hapi');
+'use strict';
 
-// initialize http listener on a default port
-var server = new Hapi.Server();
+var SwaggerExpress = require('swagger-express-mw');
+var app = require('express')();
+module.exports = app; // for testing
+var config = {
+  appRoot: __dirname // required config
+};
 
-// initialize SwaggerHapi and start the server
-swaggerHapi.create({ appRoot: __dirname }, function(err, swaggerHapi) {
+SwaggerExpress.create(config, function(err, swaggerExpress) {
   if (err) { throw err; }
+  // install middleware for swagger ui
+  app.use(swaggerExpress.runner.swaggerTools.swaggerUi());  
+  // install middleware for swagger routing
+  swaggerExpress.register(app);
   var port = process.env.PORT || 3000;
-  server.connection({ port: port });
-  server.address = function() {
-    return { port: port };
-  };
-  // register SwaggerHapi plugin
-  server.register(swaggerHapi.plugin, function(err) {
-    if (err) { return console.error('Failed to load plugin:', err); }
-    // start the server
-    server.start(function() {
-      console.log('Server started on ' + server.info.uri);
-    });
-  });
+  app.listen(port);
 });

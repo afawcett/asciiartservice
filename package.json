@@ -4,7 +4,7 @@
   "main": "server.js",
   "dependencies": {
     "figlet": "^1.2.0",
-    "hapi": "~8.4.0",
-    "swagger-hapi": "^0.1.0"
-  }
+    "express": "^4.12.3",
+    "swagger-express-mw": "^0.1.0"
+   }
 }

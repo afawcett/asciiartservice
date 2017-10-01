@@ -5,7 +5,7 @@ info:
 # during dev, should point to your local machine
 host: localhost:3000
 # basePath prefixes all resource paths 
-basePath: /
+# basePath: /
 # 
 schemes:
   # tip: remove http to make production-grade
@@ -44,7 +44,7 @@ paths:
           schema:
             # a pointer to a definition
             $ref: "#/definitions/ASCIIArtResponse"
-  /swagger:
+  /schema:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
 definitions:

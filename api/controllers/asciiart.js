@@ -1,10 +1,10 @@
 var figlet = require('figlet');
 
-function asciiart(request, reply) {
+function asciiart(request, response) {
     // Call figlet to generate the ASCII Art and return it!
-    const msg = request.swagger.params.body.value.message;
+    const msg = request.body.message;
     figlet(msg, function(err, data) {
-        reply.json({ art: data});
+        response.json({ art: data});
     });    
 }
   
